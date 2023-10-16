@@ -1,4 +1,4 @@
-/** Types generated for queries found in "backend/db/sql/insertBook.sql" */
+/** Types generated for queries found in "src/db/sql/insertBook.sql" */
 import { PreparedQuery } from '@pgtyped/runtime';
 
 /** 'InsertBook' parameters type */
@@ -28,7 +28,7 @@ export interface IInsertBookQuery {
   result: IInsertBookResult;
 }
 
-const insertBookIR: any = {"usedParamSet":{"title":true,"author":true,"coverImage":true,"totalPages":true},"params":[{"name":"title","required":false,"transform":{"type":"scalar"},"locs":[{"a":130,"b":135}]},{"name":"author","required":false,"transform":{"type":"scalar"},"locs":[{"a":146,"b":152}]},{"name":"coverImage","required":false,"transform":{"type":"scalar"},"locs":[{"a":163,"b":173}]},{"name":"totalPages","required":false,"transform":{"type":"scalar"},"locs":[{"a":184,"b":194}]}],"statement":"INSERT INTO\n    \"book\" (\n        \"title\",\n        \"author\",\n        \"coverImage\",\n        \"totalPages\"\n    )\nVALUES\n    (\n        :title,\n        :author,\n        :coverImage,\n        :totalPages\n    ) RETURNING *"};
+const insertBookIR: any = {"usedParamSet":{"title":true,"author":true,"coverImage":true,"totalPages":true},"params":[{"name":"title","required":false,"transform":{"type":"scalar"},"locs":[{"a":151,"b":156}]},{"name":"author","required":false,"transform":{"type":"scalar"},"locs":[{"a":167,"b":173}]},{"name":"coverImage","required":false,"transform":{"type":"scalar"},"locs":[{"a":184,"b":194}]},{"name":"totalPages","required":false,"transform":{"type":"scalar"},"locs":[{"a":205,"b":215}]}],"statement":"INSERT INTO\n    \"book\" (\n        \"title\",\n        \"author\",\n        \"coverImage\",\n        \"totalPages\",\n        \"pagesRead\"\n    )\nVALUES\n    (\n        :title,\n        :author,\n        :coverImage,\n        :totalPages,\n        0\n    ) RETURNING *"};
 
 /**
  * Query generated from SQL:
@@ -38,14 +38,16 @@ const insertBookIR: any = {"usedParamSet":{"title":true,"author":true,"coverImag
  *         "title",
  *         "author",
  *         "coverImage",
- *         "totalPages"
+ *         "totalPages",
+ *         "pagesRead"
  *     )
  * VALUES
  *     (
  *         :title,
  *         :author,
  *         :coverImage,
- *         :totalPages
+ *         :totalPages,
+ *         0
  *     ) RETURNING *
  * ```
  */

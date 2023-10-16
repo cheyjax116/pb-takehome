@@ -4,12 +4,14 @@ INSERT INTO
         "title",
         "author",
         "coverImage",
-        "totalPages"
+        "totalPages",
+        "pagesRead"
     )
 VALUES
     (
         :title,
         :author,
         :coverImage,
-        :totalPages
+        :totalPages,
+        0
     ) RETURNING *;

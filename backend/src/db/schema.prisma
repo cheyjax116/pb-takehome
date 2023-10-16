@@ -16,8 +16,8 @@ model book {
   author String
   coverImage String 
   totalPages Int
-  pagesRead Int @default(0)
+  pagesRead Int? @default(0)
   notes String? 
-  startDate DateTime @default(now())
-  completionDate DateTime? 
+  startDate DateTime @default(now()) @db.Date
+  completionDate DateTime? @db.Date
 }

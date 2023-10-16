@@ -10,7 +10,7 @@
     "start-backend": "npx nodemon backend/server.ts",
     "codegen:gql": "graphql-codegen",
     "codegen:sql": "npx pgtyped -w -c config.json",
-    "migration:run": "npx prisma migrate dev --schema=./backend/db/schema.prisma",
+    "migration:run": "npx prisma migrate dev --schema=./src/db/schema.prisma",
     "codegen": "graphql-codegen --config codegen.yaml"
   },
   "dependencies": {

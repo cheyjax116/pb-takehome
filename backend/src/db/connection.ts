@@ -1,8 +1,6 @@
 import { Client } from "pg";
 
 console.log(`Server is pointing at ${process.env.NODE_ENV}`);
-console.log(`User is...${process.env.USER_MAIN}`);
-
 export const client =
   process.env.NODE_ENV === "development"
     ? new Client({
