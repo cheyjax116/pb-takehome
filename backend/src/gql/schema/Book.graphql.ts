@@ -7,10 +7,10 @@ export const Book = gql`
     author: String!
     coverImage: String!
     totalPages: Int!
-    pagesRead: Int!
-    notes: String!
-    startDate: DateTime!
-    completionDate: DateTime!
+    pagesRead: Int
+    notes: String
+    startDate: Date!
+    completionDate: Date
   }
 
   input BookInput {
@@ -22,12 +22,20 @@ export const Book = gql`
     notes: String
   }
 
+  input updateBookInput {
+    pagesRead: Int
+    notes: String
+    startDate: Date
+    completionDate: Date
+  }
+
   type Mutation {
     insertBook(input: BookInput!): Book!
+    updateBookInfo(title: String!, edits: updateBookInput): Book
   }
 
   type Query {
-    bookByTitle(title: String!): Book
+    bookByTitle(title: String!): Book!
     bookByAuthor(author: String!): [Book!]!
   }
 `;
