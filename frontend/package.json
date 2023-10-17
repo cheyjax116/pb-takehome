@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "client-dev": "cd../frontend && next dev",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -14,6 +14,7 @@
     "codegen": "graphql-codegen --config codegen.yaml"
   },
   "dependencies": {
+    "@apollo/client": "^3.8.6",
     "@apollo/server": "^4.9.4",
     "@graphql-cli/codegen": "^3.0.4",
     "@pgtyped/cli": "^2.3.0",
