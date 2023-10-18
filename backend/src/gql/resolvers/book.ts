@@ -55,6 +55,10 @@ const resolvers = {
         title,
       });
     },
+
+    getAllBooks: async (parent, args, context) => {
+      return await bookService.getAllBooks();
+    },
   },
 };
 

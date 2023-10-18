@@ -37,5 +37,6 @@ export const Book = gql`
   type Query {
     bookByTitle(title: String!): Book!
     bookByAuthor(author: String!): [Book!]!
+    getAllBooks: [Book!]!
   }
 `;
