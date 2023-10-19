@@ -4,4 +4,4 @@ SELECT
 FROM
     "book"
 WHERE
-    "book"."title" = :title;
+    LOWER(REPLACE("book"."title", ' ', '')) = :title;

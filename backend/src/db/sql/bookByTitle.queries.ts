@@ -25,7 +25,7 @@ export interface IBookByTitleQuery {
   result: IBookByTitleResult;
 }
 
-const bookByTitleIR: any = {"usedParamSet":{"title":true},"params":[{"name":"title","required":false,"transform":{"type":"scalar"},"locs":[{"a":56,"b":61}]}],"statement":"SELECT\n    *\nFROM\n    \"book\"\nWHERE\n    \"book\".\"title\" = :title"};
+const bookByTitleIR: any = {"usedParamSet":{"title":true},"params":[{"name":"title","required":false,"transform":{"type":"scalar"},"locs":[{"a":81,"b":86}]}],"statement":"SELECT\n    *\nFROM\n    \"book\"\nWHERE\n    LOWER(REPLACE(\"book\".\"title\", ' ', '')) = :title"};
 
 /**
  * Query generated from SQL:
@@ -35,7 +35,7 @@ const bookByTitleIR: any = {"usedParamSet":{"title":true},"params":[{"name":"tit
  * FROM
  *     "book"
  * WHERE
- *     "book"."title" = :title
+ *     LOWER(REPLACE("book"."title", ' ', '')) = :title
  * ```
  */
 export const bookByTitle = new PreparedQuery<IBookByTitleParams,IBookByTitleResult>(bookByTitleIR);

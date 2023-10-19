@@ -560,6 +560,9 @@ video {
 .fixed {
   position: fixed;
 }
+.absolute {
+  position: absolute;
+}
 .relative {
   position: relative;
 }
@@ -599,6 +602,9 @@ video {
 .max-w-5xl {
   max-width: 64rem;
 }
+.flex-row {
+  flex-direction: row;
+}
 .flex-col {
   flex-direction: column;
 }
@@ -616,6 +622,9 @@ video {
 }
 .justify-between {
   justify-content: space-between;
+}
+.border {
+  border-width: 1px;
 }
 .border-b {
   border-bottom-width: 1px;
@@ -646,6 +655,9 @@ video {
 }
 .p-24 {
   padding: 6rem;
+}
+.p-14 {
+  padding: 3.5rem;
 }
 .pb-6 {
   padding-bottom: 1.5rem;

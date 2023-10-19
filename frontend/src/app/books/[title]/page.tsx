@@ -1,7 +1,7 @@
 "use client";
 
 import { useQuery } from "@apollo/client";
-import React, { useEffect, useState } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import { graphql } from "../../gql";
 import Link from "next/link";
 import styled from "styled-components";
@@ -21,28 +21,26 @@ const BOOK_BY_TITLE = graphql(`
   }
 `);
 
-const GET_ALL_BOOKS = graphql(`
-  query GetAllBooks {
-    getAllBooks {
-      coverImage
-      title
-      id
-      notes
-      pagesRead
-      startDate
-      completionDate
-      author
-      totalPages
-    }
-  }
-`);
-
 // type Props = {
 //   params: {
 //     title: string;
 //   };
 // };
 // const Book = ({ params: { title } }: Props)
+
+const percentage = (pagesRead: number, totalPages: number) => {
+  return ((pagesRead / totalPages) * 100).toFixed(0) + "%";
+};
+
+const convertDate = (date: string) => {
+  if (date === null) {
+    return "N/A";
+  }
+  let newDate = new Date(date);
+  newDate.toLocaleDateString("en-US"),
+    { month: "2-digit", day: "2-digit", year: "numeric" };
+  return newDate.toString();
+};
 
 const Book = ({ params }) => {
   const [bookTitle, setBookTitle] = useState("");
@@ -54,42 +52,100 @@ const Book = ({ params }) => {
   // const [pagesRead, setPagesRead] = useState(0);
 
   const { data, loading, error } = useQuery(BOOK_BY_TITLE, {
-    variables: { title: "Catching Fire" },
+    variables: { title: params.title.replace(/\-/g, "") },
   });
-  const {
-    data: allBooksData,
-    loading: allBooksLoading,
-    error: allBooksError,
-  } = useQuery(GET_ALL_BOOKS);
 
-  // console.log(allBooksData);
   // console.log(data);
 
-  // console.log(data?.bookByTitle.notes);
+  // useEffect(() => {
+  //   setBookTitle(data?.bookByTitle.title.replace(/\s/g, "").toLowerCase());
+  // });
 
-  useEffect(() => {
-    setBookTitle(data?.bookByTitle.title.replace(/\s/g, "").toLowerCase());
-  });
-
-  if (loading) return <p>Loading...</p>;
+  if (loading)
+    return <p style={{ textAlign: "center", padding: "50%" }}>Loading...</p>;
   return (
-    <div>
-      Book Title: {data?.bookByTitle.title}
+    <MainDiv>
+      <BookTitle>{data?.bookByTitle.title}</BookTitle>
+      <h2 style={{ paddingBottom: "30px" }}>By: {data?.bookByTitle.author}</h2>
       <div>
-        <div>
-          <BookShelfImageContainer>
-            <Link href={bookTitle ? bookTitle : ""}>
-              <img src={data?.bookByTitle.coverImage} width="200"></img>;
-            </Link>
-          </BookShelfImageContainer>
-        </div>
+        <CoverImageContainer>
+          <img src={data?.bookByTitle.coverImage}></img>
+        </CoverImageContainer>
       </div>
-    </div>
+
+      <BookStatsDiv>
+        <div>
+          Pages: {data?.bookByTitle.pagesRead} / {data?.bookByTitle.totalPages}{" "}
+          (
+          {percentage(
+            data?.bookByTitle.pagesRead,
+            data?.bookByTitle.totalPages
+          )}
+          )
+        </div>
+        <div>Start Date: {convertDate(data?.bookByTitle.startDate)}</div>
+        <div>
+          Completion Date: {convertDate(data?.bookByTitle.completionDate)}
+        </div>
+      </BookStatsDiv>
+      <div style={{ width: "600px", paddingTop: "10px", alignItems: "center" }}>
+        Notes: {data?.bookByTitle.notes}
+      </div>
+      <ButtonDiv>
+        <Button>Update Book Stats</Button>
+        <Link href={"/"} style={{ paddingTop: "100px" }}>
+          <Button>Go To Bookshelf</Button>
+        </Link>
+      </ButtonDiv>
+    </MainDiv>
   );
 };
 
 export default Book;
 
-const BookShelfImageContainer = styled.div`
-  width: 200px;
+const MainDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  height: 100vh;
+`;
+
+const CoverImageContainer = styled.div`
+  width: 400px;
+`;
+
+const Button = styled.button`
+  font-size: 20px;
+  padding-top: 20px;
+  align-self: flex-end;
+  width: 230px;
+  background: transparent;
+  border-radius: 3px;
+  border: 2px solid #3b61eb;
+  margin: 0 1em;
+  padding: 0.8em 1em;
+  &:hover {
+    background-color: #3b61eb;
+    color: whitesmoke;
+  }
+`;
+
+const BookTitle = styled.h1`
+  font-size: 30px;
+  text-align: center;
+  padding-top: 15px;
+  /* padding-bottom: 20px; */
+`;
+
+const ButtonDiv = styled.div`
+  padding-top: 100px;
+  justify-content: flex-end;
+`;
+
+const BookStatsDiv = styled.div`
+  padding-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
