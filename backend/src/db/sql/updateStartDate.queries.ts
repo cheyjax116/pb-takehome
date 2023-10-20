@@ -18,7 +18,7 @@ export interface IUpdateStartDateQuery {
   result: IUpdateStartDateResult;
 }
 
-const updateStartDateIR: any = {"usedParamSet":{"startDate":true,"title":true},"params":[{"name":"startDate","required":false,"transform":{"type":"scalar"},"locs":[{"a":40,"b":49}]},{"name":"title","required":false,"transform":{"type":"scalar"},"locs":[{"a":71,"b":76}]}],"statement":"UPDATE\n    \"book\"\nSET\n    \"startDate\" = :startDate\nWHERE\n    \"title\" = :title"};
+const updateStartDateIR: any = {"usedParamSet":{"startDate":true,"title":true},"params":[{"name":"startDate","required":false,"transform":{"type":"scalar"},"locs":[{"a":40,"b":49}]},{"name":"title","required":false,"transform":{"type":"scalar"},"locs":[{"a":103,"b":108}]}],"statement":"UPDATE\n    \"book\"\nSET\n    \"startDate\" = :startDate\nWHERE\n    LOWER(REPLACE(\"book\".\"title\", ' ', '')) = :title"};
 
 /**
  * Query generated from SQL:
@@ -28,7 +28,7 @@ const updateStartDateIR: any = {"usedParamSet":{"startDate":true,"title":true},"
  * SET
  *     "startDate" = :startDate
  * WHERE
- *     "title" = :title
+ *     LOWER(REPLACE("book"."title", ' ', '')) = :title
  * ```
  */
 export const updateStartDate = new PreparedQuery<IUpdateStartDateParams,IUpdateStartDateResult>(updateStartDateIR);

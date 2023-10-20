@@ -18,6 +18,6 @@ model book {
   totalPages Int
   pagesRead Int? @default(0)
   notes String? 
-  startDate DateTime @default(now()) @db.Date
+  startDate DateTime? @default(now()) @db.Date
   completionDate DateTime? @db.Date
 }

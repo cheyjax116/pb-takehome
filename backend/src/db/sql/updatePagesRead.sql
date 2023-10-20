@@ -4,4 +4,4 @@ UPDATE
 SET
     "pagesRead" = :pagesRead
 WHERE
-    "title" = :title;
+    LOWER(REPLACE("book"."title", ' ', '')) = :title;

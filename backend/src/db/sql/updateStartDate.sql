@@ -4,4 +4,4 @@ UPDATE
 SET
     "startDate" = :startDate
 WHERE
-    "title" = :title;
+    LOWER(REPLACE("book"."title", ' ', '')) = :title;

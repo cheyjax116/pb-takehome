@@ -4,4 +4,4 @@ UPDATE
 SET
     "notes" = :notes
 WHERE
-    "title" = :title;
+    LOWER(REPLACE("book"."title", ' ', '')) = :title;

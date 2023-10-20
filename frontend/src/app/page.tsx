@@ -31,18 +31,31 @@ export default function Home() {
   return (
     <main>
       <Header>Book Shelf</Header>
-      <BookShelfContainer>
-        {allBooksData?.getAllBooks.map((book) => {
-          return (
-            <Link
-              key={book.id}
-              href={`books/${book.title.replace(/\s/g, "-").toLowerCase()}`}
-            >
-              <img key={book.id} src={book.coverImage} width="300"></img>
-            </Link>
-          );
-        })}
-      </BookShelfContainer>
+      {!allBooksData ? (
+        <Header
+          style={{
+            opacity: "0.15",
+            margin: "auto 0",
+            fontSize: "50px",
+            padding: "20%",
+          }}
+        >
+          Book Shelf Empty
+        </Header>
+      ) : (
+        <BookShelfContainer>
+          {allBooksData?.getAllBooks.map((book) => {
+            return (
+              <Link
+                key={book.id}
+                href={`books/${book.title.replace(/\s/g, "-").toLowerCase()}`}
+              >
+                <img key={book.id} src={book.coverImage} width="300"></img>
+              </Link>
+            );
+          })}
+        </BookShelfContainer>
+      )}
     </main>
   );
 }

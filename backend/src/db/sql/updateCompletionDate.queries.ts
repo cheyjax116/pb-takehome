@@ -18,7 +18,7 @@ export interface IUpdateCompletionDateQuery {
   result: IUpdateCompletionDateResult;
 }
 
-const updateCompletionDateIR: any = {"usedParamSet":{"completionDate":true,"title":true},"params":[{"name":"completionDate","required":false,"transform":{"type":"scalar"},"locs":[{"a":45,"b":59}]},{"name":"title","required":false,"transform":{"type":"scalar"},"locs":[{"a":81,"b":86}]}],"statement":"UPDATE\n    \"book\"\nSET\n    \"completionDate\" = :completionDate\nWHERE\n    \"title\" = :title"};
+const updateCompletionDateIR: any = {"usedParamSet":{"completionDate":true,"title":true},"params":[{"name":"completionDate","required":false,"transform":{"type":"scalar"},"locs":[{"a":45,"b":59}]},{"name":"title","required":false,"transform":{"type":"scalar"},"locs":[{"a":113,"b":118}]}],"statement":"UPDATE\n    \"book\"\nSET\n    \"completionDate\" = :completionDate\nWHERE\n    LOWER(REPLACE(\"book\".\"title\", ' ', '')) = :title"};
 
 /**
  * Query generated from SQL:
@@ -28,7 +28,7 @@ const updateCompletionDateIR: any = {"usedParamSet":{"completionDate":true,"titl
  * SET
  *     "completionDate" = :completionDate
  * WHERE
- *     "title" = :title
+ *     LOWER(REPLACE("book"."title", ' ', '')) = :title
  * ```
  */
 export const updateCompletionDate = new PreparedQuery<IUpdateCompletionDateParams,IUpdateCompletionDateResult>(updateCompletionDateIR);

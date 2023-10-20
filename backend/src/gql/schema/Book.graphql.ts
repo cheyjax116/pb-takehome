@@ -9,8 +9,8 @@ export const Book = gql`
     totalPages: Int!
     pagesRead: Int
     notes: String
-    startDate: Date!
-    completionDate: Date
+    startDate: DateTime
+    completionDate: DateTime
   }
 
   input BookInput {
@@ -31,7 +31,7 @@ export const Book = gql`
 
   type Mutation {
     insertBook(input: BookInput!): Book!
-    updateBookInfo(title: String!, edits: updateBookInput): Book
+    updateBookInfo(title: String!, edits: updateBookInput): Book!
   }
 
   type Query {

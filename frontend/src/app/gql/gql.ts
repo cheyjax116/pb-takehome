@@ -14,6 +14,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 const documents = {
     "\n  query BookByTitle($title: String!) {\n    bookByTitle(title: $title) {\n      title\n      author\n      pagesRead\n      totalPages\n      notes\n      startDate\n      completionDate\n      coverImage\n    }\n  }\n": types.BookByTitleDocument,
+    "\n  mutation UpdateBookInfo($title: String!, $edits: updateBookInput) {\n    updateBookInfo(title: $title, edits: $edits) {\n      pagesRead\n      notes\n      startDate\n      completionDate\n    }\n  }\n": types.UpdateBookInfoDocument,
     "\n  query GetAllBooks {\n    getAllBooks {\n      coverImage\n      title\n      id\n      notes\n      pagesRead\n      startDate\n      completionDate\n      author\n      totalPages\n    }\n  }\n": types.GetAllBooksDocument,
 };
 
@@ -35,6 +36,10 @@ export function graphql(source: string): unknown;
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  query BookByTitle($title: String!) {\n    bookByTitle(title: $title) {\n      title\n      author\n      pagesRead\n      totalPages\n      notes\n      startDate\n      completionDate\n      coverImage\n    }\n  }\n"): (typeof documents)["\n  query BookByTitle($title: String!) {\n    bookByTitle(title: $title) {\n      title\n      author\n      pagesRead\n      totalPages\n      notes\n      startDate\n      completionDate\n      coverImage\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation UpdateBookInfo($title: String!, $edits: updateBookInput) {\n    updateBookInfo(title: $title, edits: $edits) {\n      pagesRead\n      notes\n      startDate\n      completionDate\n    }\n  }\n"): (typeof documents)["\n  mutation UpdateBookInfo($title: String!, $edits: updateBookInput) {\n    updateBookInfo(title: $title, edits: $edits) {\n      pagesRead\n      notes\n      startDate\n      completionDate\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
