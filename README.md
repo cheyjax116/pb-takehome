@@ -2,7 +2,7 @@
 
 ## local-dev Repo for Docker Container
 
-Pull down the local-dev repo "here" and run commands in README.md file to set up Docker container.
+Pull down the local-dev repo [here](https://github.com/cheyjax116/local-dev) and run commands in README.md file to set up Docker container.
 
 ## Preparing Backend for launch
 
