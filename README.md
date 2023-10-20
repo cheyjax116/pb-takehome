@@ -1,4 +1,4 @@
-## Book Tracker Stats Set Up
+## Book Stats Tracker Takehome Set Up
 
 ## Pull local-dev Repo for Docker Container
 
