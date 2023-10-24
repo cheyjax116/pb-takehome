@@ -19,10 +19,6 @@ async function startApolloServer(schema: any, resolvers: any) {
 
   connectDatabase();
 
-  interface MyContext {
-    token?: String;
-  }
-
   const httpServer = http.createServer(app);
   const server = new ApolloServer({
     typeDefs: schema,
@@ -30,7 +26,6 @@ async function startApolloServer(schema: any, resolvers: any) {
     introspection: true,
     //Attach GQL Server with Express
     plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
-    // cache: "bounded",
   });
 
   // Start the GraphQL server.
@@ -40,9 +35,7 @@ async function startApolloServer(schema: any, resolvers: any) {
     "/graphql",
     cors<cors.CorsRequest>(),
     json(),
-    expressMiddleware(server, {
-      context: async ({ req }) => ({ token: req.headers.token }),
-    })
+    expressMiddleware(server)
   );
 
   await new Promise<void>((resolve) =>

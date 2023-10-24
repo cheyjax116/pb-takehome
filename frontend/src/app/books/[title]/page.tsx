@@ -7,7 +7,6 @@ import { graphql } from "../../gql";
 import Link from "next/link";
 import styled from "styled-components";
 import loadingGif from "../../../../public/loading.gif";
-import blurredTemplate from "../../../../public/blurredBTemplate.jpg";
 
 const BOOK_BY_TITLE = graphql(`
   query BookByTitle($title: String!) {
@@ -52,6 +51,7 @@ const Book = ({ params }) => {
   const [completionDate, setCompletionDate] = useState("");
   const [notes, setNotes] = useState("");
   const [pagesRead, setPagesRead] = useState("");
+  const [totalPages, setTotalPages] = useState("");
 
   const { data, loading, error } = useQuery(BOOK_BY_TITLE, {
     variables: { title: params.title.replace(/\-/g, "") },
@@ -61,7 +61,8 @@ const Book = ({ params }) => {
 
   useEffect(() => {
     setNotes(data?.bookByTitle.notes);
-  }, []);
+    setTotalPages(data?.bookByTitle.totalPages.toString());
+  }, [completionDate]);
 
   const timeElaspedReading = (date: string) => {
     if (date === null) {
@@ -78,6 +79,16 @@ const Book = ({ params }) => {
     let startDate = new Date(date).getTime();
     let days = (endDate - startDate) / (1000 * 3600 * 24);
     return Math.floor(days);
+  };
+
+  const startDateMax = () => {
+    if (!data?.bookByTitle.completionDate) {
+      return new Date().toLocaleDateString("en-CA");
+    } else {
+      return new Date(data?.bookByTitle.completionDate).toLocaleDateString(
+        "en-CA"
+      );
+    }
   };
 
   const overlayOn = () => {
@@ -156,9 +167,7 @@ const Book = ({ params }) => {
           ></StyledInput>
           <StyledInput
             placeholder="Start Date"
-            max={new Date(data?.bookByTitle.completionDate).toLocaleDateString(
-              "en-CA"
-            )}
+            max={startDateMax()}
             type="date"
             onChange={(e) => setStartDate(e.target.value)}
           ></StyledInput>
@@ -184,7 +193,12 @@ const Book = ({ params }) => {
                   variables: {
                     title: params.title.replace(/\-/g, ""),
                     edits: {
-                      pagesRead: pagesRead != "" ? Number(pagesRead) : null,
+                      pagesRead:
+                        pagesRead != ""
+                          ? Number(pagesRead)
+                          : completionDate
+                          ? Number(totalPages)
+                          : null,
                       notes: notes,
                       startDate: startDate,
                       completionDate: completionDate,
